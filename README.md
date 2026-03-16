@@ -138,47 +138,7 @@ The app will be available at `http://localhost:3000`.
 - A simulated progress bar (decelerating fill) provides feedback during the ~30–60 second generation window.
 - The response blob is converted to an object URL and auto-downloaded.
 
----
 
-## Configuration Reference
-
-| Variable | Default | Description |
-|---|---|---|
-| `OPENROUTER_API_KEY` | required | OpenRouter authentication key |
-| `UNSPLASH_ACCESS_KEY` | required | Unsplash API key for title images |
-| `PDFLATEX_PATH` | MiKTeX path (Windows) | Full path to `pdflatex` binary |
-| `OPENROUTER_MODEL` | `anthropic/claude-3.7-sonnet` | LLM model identifier |
-
----
-
-## Troubleshooting
-
-**PDF not generated**
-- Verify `pdflatex` is installed and the `PDFLATEX_PATH` env variable points to the correct binary.
-- Check the FastAPI logs — truncated LaTeX stderr is included in the error message.
-
-**Unsplash image missing from title slide**
-- The app continues without an image if the Unsplash request fails. Check your `UNSPLASH_ACCESS_KEY`.
-
-**OpenRouter 401 / 429 errors**
-- Confirm your API key is valid and you have sufficient credits.
-
-**spaCy model not found**
-- Run `python -m spacy download en_core_web_sm` inside your virtual environment.
-
-**CORS errors in the browser**
-- Ensure the backend is running on port 8000. For production, replace `allow_origins=["*"]` in `main.py` with your frontend's domain.
-
----
-
-## Extending the Project
-
-- **Add a new presentation type** — extend the `if/elif` block in the `style_instructions` section of `main.py` and add a corresponding `<option>` in `App.js`.
-- **Swap the LLM** — change `OPENROUTER_MODEL` in `.env` to any model available on OpenRouter.
-- **Improve RAG** — update `rag/retriever.py` to connect to a vector database (e.g., Chroma, Pinecone) for domain-specific grounding.
-- **Add slide preview** — embed a PDF viewer (e.g., `react-pdf`) in `App.js` to preview slides before downloading.
-
----
 
 ## License
 
